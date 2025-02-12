@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./style/bootstrap.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <!-- Custom Theme CSS -->
+    <link rel="stylesheet" href="./style/theme.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/imgs/favicon.svg">
+
+    <!-- Highcharts Maps Libraries -->
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
+
+    <title>Meril - Product Overview</title>
+    
+    <!-- Optional custom styles for the globe container and product table -->
+    <style>
+      /* Set a uniform background for the entire page */
+      body {
+        background-color: #121212;
+        color: white;
+        overflow-x: hidden;
+      }
+      
+      /* Ensure the globe container takes sufficient vertical space */
+      #globe-container {
+        height: 500px;
+      }
+      
+      /* Product Table CSS */
+      #productTableContainer {
+          margin-top: 20px;
+      }
+      #productTableContainer table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 14px;
+          background-color: #1a1a1a;
+          color: #fff;
+          margin: 0 auto;
+      }
+      #productTableContainer thead {
+          background-color: #333;
+      }
+      #productTableContainer th,
+      #productTableContainer td {
+          border: 1px solid #444;
+          padding: 10px 15px;
+          text-align: left;
+      }
+      #productTableContainer th {
+          font-weight: bold;
+      }
+      #productTableContainer tbody tr:nth-child(even) {
+          background-color: #222;
+      }
+      #productTableContainer tbody tr:hover {
+          background-color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="dustCanvas" class="w-100"></canvas>
+    
+    <!-- Navbar (Not fixed; will scroll away) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blur">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">
+          <img src="https://www.merillife.com/assets/images/home/new/meril_logo_new.png" alt class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="https://www.merillife.com/meril-academy">Meril Academy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://merillife.zohorecruit.in/jobs/merilcareer?/about-us/careers">Careers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.merillife.com/blog">Blogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.merillife.com/about-us">About Us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="header-buttons">
+          <a href="#" class="login"><i class="fas fa-user"></i> Log In</a>
+          <a href="#" class="btn">Get Started</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="hero-section">
+      <div class="hero-title mx-auto text-center px-5 pt-5">
+        <h1 class="hero-heading px-5">Elevate Your Vision, Ignite Tomorrow’s Innovation.</h1>
+        <div class="hero-subtitle mt-3">
+          <p class="mb-0 hero-subheading">Crafting Digital Excellence for a Future</p>
+          <p class="mb-0 hero-subheading">Beyond Imagination.</p>
+        </div>
+      </div>
+      <div class="scroll-down">
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <span class="text">Scroll down</span>
+      </div>
+    </div>
+
+    <!-- Globe Section -->
+    <section id="globe-section" class="py-5">
+      <div class="container">
+        <figure class="highcharts-figure">
+          <div id="globe-container"></div>
+          <p class="highcharts-description text-center mt-3">
+            Blue: Registered (or mixed). Orange: Only Under Registration.
+          </p>
+        </figure>
+        <!-- Product Table Container for when a country is clicked -->
+        <div id="productTableContainer" class="mt-4"></div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <div class="container">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+          <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+          </a>
+          <p class="text-muted">© 2022</p>
+        </div>
+        <div class="col mb-3">
+          <!-- Additional footer content can be added here -->
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <!-- jQuery (required by Owl Carousel) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+    <!-- Bootstrap Bundle -->
+    <script src="./script/bootstrap.bundle.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="./script/owl.carousel.js"></script>
+    <!-- Swiper -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Owl Carousel Initialization -->
+    <script src="./script/owlcarousel.js"></script>
+    <!-- Swiper Initialization -->
+    <script src="./script/swiper.js"></script>
+    <!-- Custom Main Scripts -->
+    <script src="./script/main.js"></script>
+    <!-- Dust Animation -->
+    <script src="./script/dustAnimation.js"></script>
+    
+    <!-- Include the globe JS from an external file -->
+    <script src="./script/globe.js"></script>
+  </body>
+</html>
