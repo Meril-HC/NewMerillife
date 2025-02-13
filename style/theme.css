@@ -541,7 +541,14 @@ ul {
   opacity: .25;
   animation: pulse 2s linear alternate infinite;
 }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
+.hero-heading {
+  animation: fadeIn 2s ease-in-out;
+}
 @keyframes pulse {
   to {
     opacity: 1;
